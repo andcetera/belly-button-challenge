@@ -1,7 +1,7 @@
 # Belly Button Biodiversity Dashboard
 Building an interactive dashboard using JavaScript Plotly and D3 libraries to explore the Belly Button Biodiversity dataset, which catalogs the microbes that colonize human navels.
 - - -
-<center><img src='Images/bacteria.jpg' width='500' height='400'></center>  
+<img src='Images/bacteria.jpg' width='500' height='400'>  
 
 - - -
 ## Project Structure...TBA
@@ -59,7 +59,7 @@ Additionally, you are welcome to create any layout that you would like for your 
 ## Advanced Challenge Assignment (Optional with no extra points earning)
 The following task is advanced and therefore optional.
 
-- Adapt the Gauge Chart from https://plot.ly/javascript/gauge-charts/ Links to an external site.to plot the weekly washing frequency of the individual.
+- Adapt the Gauge Chart from https://plot.ly/javascript/gauge-charts/ to plot the weekly washing frequency of the individual.
 
 - You will need to modify the example gauge code to account for values ranging from 0 through 9.
 
