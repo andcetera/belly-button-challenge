@@ -13,7 +13,7 @@ d3.json(url).then(function(data){
     console.log(meta[0]);
     console.log(samples[0]);
 
-    // get top 10 sample values & display in descending order
+    // get top 10 sample values & list in descending order
     let sample = samples[0];
     let x = sample.sample_values.slice(0, 10).reverse();
     let y = sample.otu_ids.slice(0, 10).reverse();
@@ -31,9 +31,20 @@ d3.json(url).then(function(data){
     // display intial bar chart plot to 'bar' div
     Plotly.newPlot('bar', initbar);
 
-    //add names to the dropdown menu 
-    //(programmatically?) #selDataset (has property onchange="optionChanged(this.value))
+    //add names to the dropdown menu
+    for(i = 0; i < names.length; i++){
+        d3.select('#selDataset').append('option').text(names[i]).property('value', names[i].toString());
+    }
+
+    //#selDataset (has property onchange="optionChanged(this.value))
+    d3.selectAll('#selDataset').on('change', updatePlots);
+
     //and have other charts respond to changes (plotly.restyle)
+    function updatePlots(){
+        let name = d3.select('#selDataset').property('value');
+        console.log(name)
+    }
+
 
     //create bubble chart & plot to 'bubble' div
     //otu_ids(x), sample_values(y), sample_values(marker size)
