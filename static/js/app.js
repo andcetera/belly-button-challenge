@@ -7,14 +7,29 @@ d3.json(url).then(function(data){
     let names = data.names;
     let meta = data.metadata;
     let samples = data.samples;
+
+    //print names & first meta/samples to console for reference
     console.log(names);
     console.log(meta[0]);
     console.log(samples[0]);
 
-    //create horizontal bar chart & plot to 'bar' div
-    // top 10 
-    //sample_values (x), otu_ids (y)
-    //otu_labels as hovertext
+    // get top 10 sample values & display in descending order
+    let sample = samples[0];
+    let x = sample.sample_values.slice(0, 10).reverse();
+    let y = sample.otu_ids.slice(0, 10).reverse();
+    let hover = sample.otu_labels.slice(0, 10).reverse();
+
+    // create horizontal barchart
+    initbar = [{
+        x: x,
+        y: y.map(item => `OTU ${item.toString()} `),//add 'OTU ' to each label
+        type: 'bar',
+        orientation: 'h',
+        text: hover
+    }];
+
+    // display intial bar chart plot to 'bar' div
+    Plotly.newPlot('bar', initbar);
 
     //add names to the dropdown menu 
     //(programmatically?) #selDataset (has property onchange="optionChanged(this.value))
