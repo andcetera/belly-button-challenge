@@ -39,11 +39,13 @@ d3.json(url).then(function(data){
     }];
 
     //add the metadata info to the panel-primary/panel-body div(?)
+    let demo = d3.select('#sample-metadata');
+    let keys = Object.keys(meta[0])
+    let values = Object.values(meta[0])
+    demo.text(`${keys}: ${values}`);
 
 
 
-
-    
     
     // Display initial plots
     Plotly.newPlot('bar', initbar);
