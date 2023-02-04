@@ -13,6 +13,7 @@ d3.json(url).then(function(data){
     console.log(meta[0]);
     console.log(samples[0]);
 
+
     // Get top 10 sample values & list in descending order
     let sample = samples[0];
     let x = sample.sample_values.slice(0, 10).reverse();
@@ -28,12 +29,29 @@ d3.json(url).then(function(data){
         text: hover
     }];
 
+
     // Display intial bar chart plot to 'bar' div
     Plotly.newPlot('bar', initbar);
 
+    //create bubble chart & plot to 'bubble' div
+    initbub = [{
+        x: sample.otu_ids,
+        y: sample.sample_values,
+        text: sample.otu_labels,
+        mode: 'markers',
+        marker: {
+            size: sample.sample_values,
+            color: sample.otu_ids
+        }
+    }];
+    //otu_ids(x), sample_values(y), sample_values(marker size)
+    //otu_ids(marker colors), otu_labels(text values)
+    Plotly.newPlot('bubble', initbub);
+
+
     // Add names to the dropdown menu & give each a property we can call later
     for(i = 0; i < names.length; i++){
-        d3.select('#selDataset').append('option').text(names[i]).property('value', names[i].toString());
+        d3.select('#selDataset').append('option').text(`BB_${names[i]}`).property('value', names[i].toString());
     }
 
     // set listener on dropdown menu to run updatePlots function on change
@@ -65,7 +83,7 @@ d3.json(url).then(function(data){
                 hover = samples[i].otu_labels.slice(0, 10).reverse();
             }
         }
-        
+
         //Update bar chart
         Plotly.restyle('bar', 'x', [x]);
         Plotly.restyle('bar', 'y', [y]);
@@ -73,9 +91,7 @@ d3.json(url).then(function(data){
     }
 
 
-    //create bubble chart & plot to 'bubble' div
-    //otu_ids(x), sample_values(y), sample_values(marker size)
-    //otu_ids(marker colors), otu_labels(text values)
+
 
     //add the metadata info to the panel-primary/panel-body div(?)
 
