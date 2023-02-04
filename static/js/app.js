@@ -8,9 +8,6 @@ d3.json(url).then(function(data){
     let meta = data.metadata;
     let samples = data.samples;
 
-    //print names & first meta/samples to console for reference
-    console.log(meta[0]);
-
     // Get top 10 sample values & list in descending order
     let sample = samples[0];
     let x = sample.sample_values.slice(0, 10).reverse();
@@ -38,15 +35,14 @@ d3.json(url).then(function(data){
         }
     }];
 
-    //add the metadata info to the panel-primary/panel-body div(?)
+    // Add the initial metadata to the Demographic Info panel
     let demo = d3.select('#sample-metadata');
     let keys = Object.keys(meta[0])
     let values = Object.values(meta[0])
-    demo.text(`${keys}: ${values}`);
+    for(i = 0; i < keys.length; i++){
+        demo.append('p').text(`${keys[i]}: ${values[i]}`).attr('id', keys[i].toString());
+    }
 
-
-
-    
     // Display initial plots
     Plotly.newPlot('bar', initbar);
     Plotly.newPlot('bubble', initbub);
@@ -67,8 +63,10 @@ d3.json(url).then(function(data){
 
         // Get new sample name
         let name = d3.select('#selDataset').property('value');
+
+        // Print data to console for comparison
         console.log(name);
-    
+
         // Set empty array variables for each item we need to update
         // For bar chart
         let barx = [];
@@ -88,6 +86,8 @@ d3.json(url).then(function(data){
             
             // Check if our selection matches
             if(samples[i].id === name){
+
+                // Print data to console for comparison
                 console.log(samples[i]);
 
                 // Set the new values for x, y, and hover for bar chart
@@ -102,7 +102,8 @@ d3.json(url).then(function(data){
                 bubtxt = samples[i].otu_labels;
                 bsize = samples[i].sample_values;
                 bcolor = samples[i].otu_ids;
-            }
+            }  
+
         }
 
         //Update bar chart
@@ -116,13 +117,26 @@ d3.json(url).then(function(data){
         Plotly.restyle('bubble', 'text', [bubtxt]);
         Plotly.restyle('bubble', 'marker.size', [bsize]);
         Plotly.restyle('bubble', 'marker.color', [bcolor]);
+
+
+        // Iterate through the meta list to update Demographic Info box
+        for(i = 0; i < meta.length; i++){
+            
+            // Check if our selection matches
+            if(meta[i].id.toString() === name){
+
+                // Print data to console for comparison
+                console.log(meta[i]);
+
+                // Iterate through keys & update text fields
+                for(j = 0; j < keys.length; j++){
+                    k = keys[j];
+                    p = d3.select(`#${k}`).text(`${k}: ${meta[i][k.toString()]}`);
+                    
+                }
+            }
+        } 
     }
-
-
-
-
-    
-
 });
 
 // can or should anything be done outside of the datapromise function?
