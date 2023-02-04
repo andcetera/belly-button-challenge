@@ -9,10 +9,7 @@ d3.json(url).then(function(data){
     let samples = data.samples;
 
     //print names & first meta/samples to console for reference
-    console.log(names);
     console.log(meta[0]);
-    console.log(samples[0]);
-
 
     // Get top 10 sample values & list in descending order
     let sample = samples[0];
@@ -20,7 +17,7 @@ d3.json(url).then(function(data){
     let y = sample.otu_ids.slice(0, 10).reverse();
     let hover = sample.otu_labels.slice(0, 10).reverse();
 
-    // Create horizontal barchart
+    // Create initial horizontal barchart from first sample
     initbar = [{
         x: x,
         y: y.map(item => `OTU ${item.toString()} `),//add 'OTU ' to each label
@@ -28,12 +25,8 @@ d3.json(url).then(function(data){
         orientation: 'h',
         text: hover
     }];
-
-
-    // Display intial bar chart plot to 'bar' div
-    Plotly.newPlot('bar', initbar);
-
-    //create bubble chart & plot to 'bubble' div
+   
+    // Create initial bubble chart from first sample
     initbub = [{
         x: sample.otu_ids,
         y: sample.sample_values,
@@ -44,8 +37,16 @@ d3.json(url).then(function(data){
             color: sample.otu_ids
         }
     }];
-    //otu_ids(x), sample_values(y), sample_values(marker size)
-    //otu_ids(marker colors), otu_labels(text values)
+
+    //add the metadata info to the panel-primary/panel-body div(?)
+
+
+
+
+    
+    
+    // Display initial plots
+    Plotly.newPlot('bar', initbar);
     Plotly.newPlot('bubble', initbub);
 
 
@@ -64,36 +65,61 @@ d3.json(url).then(function(data){
 
         // Get new sample name
         let name = d3.select('#selDataset').property('value');
-
+        console.log(name);
+    
         // Set empty array variables for each item we need to update
-        let x = [];
-        let y = [];
-        let hover = [];
+        // For bar chart
+        let barx = [];
+        let bary = [];
+        let barhover = [];
+
+        // For bubble chart
+        let bubx = [];
+        let buby = [];
+        let bubtxt = [];
+        let bcolor = [];
+        let bsize = [];
+
 
         // Iterate through samples list
         for(i = 0; i < samples.length; i++){
             
             // Check if our selection matches
             if(samples[i].id === name){
-                
-                // Set the new values for x, y, and hover
-                x = samples[i].sample_values.slice(0, 10).reverse();
-                y = samples[i].otu_ids.slice(0, 10).reverse();
-                y = y.map(item => `OTU ${item.toString()} `);
-                hover = samples[i].otu_labels.slice(0, 10).reverse();
+                console.log(samples[i]);
+
+                // Set the new values for x, y, and hover for bar chart
+                barx = samples[i].sample_values.slice(0, 10).reverse();
+                bary = samples[i].otu_ids.slice(0, 10).reverse();
+                bary = bary.map(item => `OTU ${item.toString()} `);
+                barhover = samples[i].otu_labels.slice(0, 10).reverse();
+
+                // Set new values for x, y, hover, size, & color for bubble plot
+                bubx = samples[i].otu_ids;
+                buby = samples[i].sample_values;
+                bubtxt = samples[i].otu_labels;
+                bsize = samples[i].sample_values;
+                bcolor = samples[i].otu_ids;
             }
         }
 
         //Update bar chart
-        Plotly.restyle('bar', 'x', [x]);
-        Plotly.restyle('bar', 'y', [y]);
-        Plotly.restyle('bar', 'text', [hover]);
+        Plotly.restyle('bar', 'x', [barx]);
+        Plotly.restyle('bar', 'y', [bary]);
+        Plotly.restyle('bar', 'text', [barhover]);
+
+        //Update bubble plot
+        Plotly.restyle('bubble', 'x', [bubx]);
+        Plotly.restyle('bubble', 'y', [buby]);
+        Plotly.restyle('bubble', 'text', [bubtxt]);
+        Plotly.restyle('bubble', 'marker.size', [bsize]);
+        Plotly.restyle('bubble', 'marker.color', [bcolor]);
     }
 
 
 
 
-    //add the metadata info to the panel-primary/panel-body div(?)
+    
 
 });
 
