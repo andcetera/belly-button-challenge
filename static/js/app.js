@@ -13,13 +13,13 @@ d3.json(url).then(function(data){
     console.log(meta[0]);
     console.log(samples[0]);
 
-    // get top 10 sample values & list in descending order
+    // Get top 10 sample values & list in descending order
     let sample = samples[0];
     let x = sample.sample_values.slice(0, 10).reverse();
     let y = sample.otu_ids.slice(0, 10).reverse();
     let hover = sample.otu_labels.slice(0, 10).reverse();
 
-    // create horizontal barchart
+    // Create horizontal barchart
     initbar = [{
         x: x,
         y: y.map(item => `OTU ${item.toString()} `),//add 'OTU ' to each label
@@ -28,21 +28,48 @@ d3.json(url).then(function(data){
         text: hover
     }];
 
-    // display intial bar chart plot to 'bar' div
+    // Display intial bar chart plot to 'bar' div
     Plotly.newPlot('bar', initbar);
 
-    //add names to the dropdown menu
+    // Add names to the dropdown menu & give each a property we can call later
     for(i = 0; i < names.length; i++){
         d3.select('#selDataset').append('option').text(names[i]).property('value', names[i].toString());
     }
 
-    //#selDataset (has property onchange="optionChanged(this.value))
+    // set listener on dropdown menu to run updatePlots function on change
+     // (#selDataset has property onchange="optionChanged(this.value)...)
     d3.selectAll('#selDataset').on('change', updatePlots);
 
-    //and have other charts respond to changes (plotly.restyle)
+   
+    // Function to Update Plots when new name is chosen from dropdown menu
     function updatePlots(){
+
+        // Get new sample name
         let name = d3.select('#selDataset').property('value');
-        console.log(name)
+
+        // Set empty array variables for each item we need to update
+        let x = [];
+        let y = [];
+        let hover = [];
+
+        // Iterate through samples list
+        for(i = 0; i < samples.length; i++){
+            
+            // Check if our selection matches
+            if(samples[i].id === name){
+                
+                // Set the new values for x, y, and hover
+                x = samples[i].sample_values.slice(0, 10).reverse();
+                y = samples[i].otu_ids.slice(0, 10).reverse();
+                y = y.map(item => `OTU ${item.toString()} `);
+                hover = samples[i].otu_labels.slice(0, 10).reverse();
+            }
+        }
+        
+        //Update bar chart
+        Plotly.restyle('bar', 'x', [x]);
+        Plotly.restyle('bar', 'y', [y]);
+        Plotly.restyle('bar', 'text', [hover]);
     }
 
 
