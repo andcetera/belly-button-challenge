@@ -1,7 +1,7 @@
 # Belly Button Biodiversity Dashboard
 Building an interactive dashboard using JavaScript Plotly and D3 libraries to explore the Belly Button Biodiversity dataset, which catalogs the microbes that colonize human navels.
 - - -
-<img src='Images/bacteria.jpg' width='500' height='400'>  
+<img src='Images/corynebacteriumStockPhoto.jpg' width='900' height='500'>  
 
 - - -
 ## Project Structure...TBA
