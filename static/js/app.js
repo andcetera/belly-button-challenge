@@ -17,7 +17,7 @@ d3.json(url).then(function(data){
     // Create initial horizontal barchart from first sample
     initbar = [{
         x: x,
-        y: y.map(item => `OTU ${item.toString()} `),//add 'OTU ' to each label
+        y: y.map(item => '<b>OTU ' + item.toString() + '  </b>'),//add 'OTU ' to each label
         type: 'bar',
         orientation: 'h',
         marker:{
@@ -25,8 +25,17 @@ d3.json(url).then(function(data){
         },
         text: hover
     }];
+
+    // Add layout details to bar chart
     blayout = {
-        width: 450, height: 500, margin: { t: 0 }
+        width: 500, height: 500, margin: 'auto',
+        title: '<b>Top 10 Microbial Species<br>Present in Sample</b>',
+        xaxis: {
+            title: '<b>Sample Values</b>'
+        },
+        yaxis: {
+            linecolor: 'lightseagreen'
+        }
     }
    
     // Create initial bubble chart from first sample
@@ -41,8 +50,17 @@ d3.json(url).then(function(data){
             colorscale: 'Viridis'
         }
     }];
+
+    // Add layout details to bubble plot
     bublay = {
-        width: 1200, height: 500, margin: { t: 0, l: 30 }
+        width: 1150, height: 500, margin: 'auto',
+        title: '<b>All Microbial Species Present in Sample</b><br>(OTU ID by Values in Sample)',
+        xaxis: {
+            title: '<b>Operational Taxonomic Unit IDs</b>'
+        },
+        yaxis: {
+            title: '<b>Sample Values</b>'
+        }
     }
 
     // Add the initial metadata to the Demographic Info panel
@@ -50,7 +68,8 @@ d3.json(url).then(function(data){
     let keys = Object.keys(meta[0])
     let values = Object.values(meta[0])
     for(i = 0; i < keys.length; i++){
-        demo.append('p').text(`${keys[i]}: ${values[i]}`).attr('id', keys[i].toString());
+        bold = demo.append('strong')
+        bold.append('p').text(`${keys[i]}: ${values[i]}`).attr('id', keys[i].toString());
     }
 
     // Update color of Demographic Info panel to match our dashboard style
@@ -101,7 +120,7 @@ d3.json(url).then(function(data){
                 // Set the new values for x, y, and hover for bar chart
                 barx = samples[i].sample_values.slice(0, 10).reverse();
                 bary = samples[i].otu_ids.slice(0, 10).reverse();
-                bary = bary.map(item => `OTU ${item.toString()} `);
+                bary = bary.map(item => '<b>OTU ' + item.toString() + '  </b>');
                 barhover = samples[i].otu_labels.slice(0, 10).reverse();
 
                 // Set new values for x, y, hover, size, & color for bubble plot
