@@ -34,7 +34,8 @@ d3.json(url).then(function(data){
         mode: 'markers',
         marker: {
             size: sample.sample_values,
-            color: sample.otu_ids
+            color: sample.otu_ids,
+            colorscale: 'Viridis'
         }
     }];
     bublay = {

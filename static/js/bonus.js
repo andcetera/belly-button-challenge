@@ -16,15 +16,15 @@ d3.json(url).then(function(data){
             gauge: {
                 axis: { range: [0, 9], ticks: ''},
                 steps: [
-                    { range: [0, 1], color: '#ddead1'},
-                    { range: [1, 2], color: '#c7ddb5'},
-                    { range: [2, 3], color: '#b3cf99'},
-                    { range: [3, 4], color: '#a3c585'},
-                    { range: [4, 5], color: '#95bb72'},
-                    { range: [5, 6], color: '#87ab69'},
-                    { range: [6, 7], color: '#75975e'},
-                    { range: [7, 8], color: '#658354'},
-                    { range: [8, 9], color: '#4b6043'}
+                    { range: [0, 1], color: 'rgb(253, 231, 37)'},
+                    { range: [1, 2], color: 'rgb(180, 222, 44)'},
+                    { range: [2, 3], color: 'rgb(109, 205, 89)'},
+                    { range: [3, 4], color: 'rgb(53, 183, 121)'},
+                    { range: [4, 5], color: 'rgb(31, 158, 137)'},
+                    { range: [5, 6], color: 'rgb(38, 130, 142)'},
+                    { range: [6, 7], color: 'rgb(49, 104, 142)'},
+                    { range: [7, 8], color: 'rgb(62, 74, 137)'},
+                    { range: [8, 9], color: 'rgb(72, 40, 120)'}
                 ],
                 bar: { color: 'black', thickness: 0.1},
                 borderwidth: 0
