@@ -60,7 +60,6 @@ d3.json(url).then(function(data){
     }
 
     // set listener on dropdown menu to run updatePlots function on change
-     // (#selDataset has property onchange="optionChanged(this.value)...)
     d3.selectAll('#selDataset').on('change', updatePlots);
 
    
@@ -69,9 +68,6 @@ d3.json(url).then(function(data){
 
         // Get new sample name
         let name = d3.select('#selDataset').property('value');
-
-        // Print data to console for comparison
-        console.log(name);
 
         // Set empty array variables for each item we need to update
         // For bar chart
@@ -93,9 +89,6 @@ d3.json(url).then(function(data){
             // Check if our selection matches
             if(samples[i].id === name){
 
-                // Print data to console for comparison
-                console.log(samples[i]);
-
                 // Set the new values for x, y, and hover for bar chart
                 barx = samples[i].sample_values.slice(0, 10).reverse();
                 bary = samples[i].otu_ids.slice(0, 10).reverse();
@@ -109,7 +102,6 @@ d3.json(url).then(function(data){
                 bsize = samples[i].sample_values;
                 bcolor = samples[i].otu_ids;
             }  
-
         }
 
         //Update bar chart
@@ -131,9 +123,6 @@ d3.json(url).then(function(data){
             // Check if our selection matches
             if(meta[i].id.toString() === name){
 
-                // Print data to console for comparison
-                console.log(meta[i]);
-
                 // Iterate through keys & update text fields
                 for(j = 0; j < keys.length; j++){
                     k = keys[j];
@@ -144,8 +133,3 @@ d3.json(url).then(function(data){
         } 
     }
 });
-
-// can or should anything be done outside of the datapromise function?
-// modify style of dashboard if desired
-
-//create speedometer gauge in bonus.js file if time
