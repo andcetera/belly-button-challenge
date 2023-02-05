@@ -20,10 +20,13 @@ d3.json(url).then(function(data){
         y: y.map(item => `OTU ${item.toString()} `),//add 'OTU ' to each label
         type: 'bar',
         orientation: 'h',
+        marker:{
+            color:'lightseagreen'
+        },
         text: hover
     }];
     blayout = {
-        width: 500, height: 500, margin: { t: 0 }
+        width: 450, height: 500, margin: { t: 0 }
     }
    
     // Create initial bubble chart from first sample
@@ -49,6 +52,11 @@ d3.json(url).then(function(data){
     for(i = 0; i < keys.length; i++){
         demo.append('p').text(`${keys[i]}: ${values[i]}`).attr('id', keys[i].toString());
     }
+
+    // Update color of Demographic Info panel to match our dashboard style
+    d3.select('.panel-primary').style('border-color', 'slateblue');
+    d3.select('.panel-heading').style('background-color', 'slateblue');
+    d3.select('.panel-heading').style('border-color', 'slateblue');
 
     // Display initial plots
     Plotly.newPlot('bar', initbar, blayout);

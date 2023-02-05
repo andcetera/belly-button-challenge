@@ -9,22 +9,26 @@ d3.json(url).then(function(data){
         {
             domain: { x: [0, 1], y: [0, 1] },
             value: meta[0].wfreq,
-            title: { text: "<b>Belly Button Wash Frequency</b><br>(Scrubs Per Week)" },
+            title: { text: "<b>Belly Button Washing Frequency</b><br>(Scrubs Per Week)" },
             type: "indicator",
             mode: "gauge+number",
-            ids: ['0-1', '1-2', '2-3', '3-4', '4-5', '5-6', '6-7', '7-8', '8-9'],
             gauge: {
-                axis: { range: [0, 9], ticks: ''},
+                axis: { range: [0, 9], 
+                    ticks: '',
+                    tickmode: 'linear',
+                    tick0: 0,
+                    dtick: 1,
+                },
                 steps: [
-                    { range: [0, 1], color: 'rgb(253, 231, 37)'},
-                    { range: [1, 2], color: 'rgb(180, 222, 44)'},
-                    { range: [2, 3], color: 'rgb(109, 205, 89)'},
-                    { range: [3, 4], color: 'rgb(53, 183, 121)'},
-                    { range: [4, 5], color: 'rgb(31, 158, 137)'},
-                    { range: [5, 6], color: 'rgb(38, 130, 142)'},
-                    { range: [6, 7], color: 'rgb(49, 104, 142)'},
-                    { range: [7, 8], color: 'rgb(62, 74, 137)'},
-                    { range: [8, 9], color: 'rgb(72, 40, 120)'}
+                    { range: [0, 1], color: 'rgba(253, 231, 37, 0.7)'},
+                    { range: [1, 2], color: 'rgba(180, 222, 44, 0.7)'},
+                    { range: [2, 3], color: 'rgba(109, 205, 89, 0.7)'},
+                    { range: [3, 4], color: 'rgba(53, 183, 121, 0.7)'},
+                    { range: [4, 5], color: 'rgba(31, 158, 137, 0.7)'},
+                    { range: [5, 6], color: 'rgba(38, 130, 142, 0.7)'},
+                    { range: [6, 7], color: 'rgba(49, 104, 142, 0.7)'},
+                    { range: [7, 8], color: 'rgba(62, 74, 137, 0.7)'},
+                    { range: [8, 9], color: 'rgba(72, 40, 120, 0.7)'}
                 ],
                 bar: { color: 'black', thickness: 0.1},
                 borderwidth: 0
@@ -33,7 +37,7 @@ d3.json(url).then(function(data){
     ];
 
     // Add layout information and display plot
-    var layout = { width: 500, height: 450, margin: { t: 30, l: 0} };
+    var layout = { width: 450, height: 450, margin: { t: 100, l: 0} };
     Plotly.newPlot('gauge', data1, layout);
 });
 
