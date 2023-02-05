@@ -4,10 +4,27 @@ Building an interactive dashboard using JavaScript Plotly and D3 libraries to ex
 <img src='Images/corynebacteriumStockPhoto.jpg' width='900' height='500'>  
 
 - - -
-## Project Structure...TBA
+## Project Structure
+
+### Completed Belly Button Biodiversity Dashboard can be found [HERE](https://andcetera.github.io/belly-button-challenge/)
+ - Use the dropdown menu on the top right-hand side to view data for each sample belly-button
+ - More information available on hover for bubble and bar plots
+
+### Files
+- Original dataset can be found in the [data](data/) folder, included for reference only.
+- The [Images](Images/) folder contains all images used in this README.
+- Project code can be found in the [static/js](static/js/) path, along with the root [index.html](index.html) file.
+ ### Deliverable 1: [app.js](static/js/app.js)
+ All code to create & update the majority of the dashboard, including:
+ - Top 10 OTU Bar Chart
+ - Bubble Plot of Each Sample
+ - Sample Demographic Information
+ - Interactive Dropdown Menu
+### Deliverable 2: [bonus.js](static/js/bonus.js)
+All code to create & update the indicator gauge displaying belly button washing frequency.
 - - -
 
-## Background
+## Project Background
 In this assignment, you will build an interactive dashboard to explore the Belly Button Biodiversity dataset, which catalogs the microbes that colonize human navels.
 
 The dataset reveals that a small handful of microbial species (also called operational taxonomic units, or OTUs, in the study) were present in more than 70% of people, while the rest were relatively rare.
@@ -42,11 +59,9 @@ Complete the following steps:
 
 4. Display the sample metadata, i.e., an individual's demographic information.
 
-5. Display each key-value pair from the metadata JSON object somewhere on the page.
-
 ![Demographic Info Table](Images/hw03.png)
 
-6. Update all the plots when a new sample is selected. 
+5. Update all the plots when a new sample is selected. 
 
 ![Dropdown Example](Images/dropdown.png)
 
@@ -54,7 +69,7 @@ Additionally, you are welcome to create any layout that you would like for your 
 
 ![Full Dashboard Example](Images/hw02.png)
 
-7. Deploy your app to a free static page hosting service, such as GitHub Pages. Submit the links to your deployment and your GitHub repo. Ensure that your repository has regular commits and a thorough README.md file
+6. Deploy your app to a free static page hosting service, such as GitHub Pages.
 
 ## Advanced Challenge Assignment (Optional with no extra points earning)
 The following task is advanced and therefore optional.
@@ -67,55 +82,6 @@ The following task is advanced and therefore optional.
 
 ![Weekly Washing Frequency Gauge](Images/gauge.png)
 
-## Hints
-- Use `console.log` inside of your JavaScript code to see what your data looks like at each step.
-
-- Refer to the [Plotly.js documentation](https://plotly.com/javascript/) when building the plots.
-
-## Requirements
-### Bar Chart (30 points)
-- Chart initializes without error (10 points)
-
-- Chart updates when a new sample is selected (5 points)
-
-- Chart uses Top 10 sample values as values (5 points)
-
-- Chart uses `otu_ids` as the labels (5 points)
-
-- Chart uses `otu_labels` as the tooltip (5 points)
-
-### Bubble Charts (40 points)
-- Chart initializes without error (10 points)
-
-- Chart updates when a new sample is selected (5 points)
-
-- Chart uses `otu_ids` for the x values (5 points)
-
-- Chart uses `otu_ids` for marker colors (5 points)
-
-- Chart uses `sample_values` for the y values (5 points)
-
-- Chart uses `sample_values` for the marker size (5 points)
-
-- Chart uses `otu_labels` for text values (5 points)
-
-### Metadata and Deployment (30 points)
-- Metadata initializes without error (10 points)
-
-- Metadata updates when a new sample is selected (10 points)
-
-- App Successfully Deployed to Github Pages (10 points)
-
-## Grading
-This assignment will be evaluated against the requirements and assigned a grade according to the following table:
-
-|Grade|Points|
-|-----|------|
-|A (+/-)|90+|
-|B (+/-)|80–89|
-|C (+/-)|70–79|
-|D (+/-)|60–69|
-|F (+/-)|< 60|
 - - -
 
 References
