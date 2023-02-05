@@ -1,10 +1,10 @@
-
+let meta = [];
 d3.json(url).then(function(data){
 
-    let names = data.names;
-    let meta = data.metadata;
-    //let samples = data.samples;
-    console.log(names[0])
+    // Save metadata to list to reference for our plot
+    meta = data.metadata;
+    
+    // Plot initial indicator gauge from first sample
     let data1 = [
         {
             domain: { x: [0, 1], y: [0, 1] },
@@ -32,36 +32,31 @@ d3.json(url).then(function(data){
         }
     ];
 
+    // Add layout information and display plot
     var layout = { width: 500, height: 450, margin: { t: 30, l: 30} };
     Plotly.newPlot('gauge', data1, layout);
-
-
-    // set listener on dropdown menu to run updatePlots function on change
-    // (#selDataset has property onchange="optionChanged(this.value)...)
-
-        // works but breaks app.js updates
-    //d3.selectAll('#selDataset').on('change', updateGauge);
-
-    // Function to Update Plots when new name is chosen from dropdown menu
-    function updateGauge(){
-
-        //optionChanged(this.value);
-        // Get new sample name
-        let name = d3.select('#selDataset').property('value');
-
-        let wash = 0;
-
-         // Iterate through the meta list to update Demographic Info box
-         for(i = 0; i < meta.length; i++){
-            
-            // Check if our selection matches
-            if(meta[i].id.toString() === name){
-
-                // Update wfreq variable
-                wash = meta[i].wfreq;
-            }
-        }
-        Plotly.restyle('gauge', 'value', [wash]);
-    }
-
 });
+
+
+// Function to Update Plot when new sample is chosen from dropdown menu
+function optionChanged(x){
+
+    // Get new sample name
+    let name = d3.select('#selDataset').property('value');
+
+    let wash = 0;
+    
+    // Iterate through the meta list to update wash frequency number
+    for(i = 0; i < meta.length; i++){
+                
+        // Check if our selection matches
+        if(meta[i].id.toString() === name){
+    
+            // Update wfreq variable
+            wash = meta[i].wfreq;
+        }
+    }
+    
+    // Restyle the plot
+    Plotly.restyle('gauge', 'value', [wash]);
+}
