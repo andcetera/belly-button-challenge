@@ -33,7 +33,7 @@ d3.json(url).then(function(data){
     ];
 
     // Add layout information and display plot
-    var layout = { width: 500, height: 450, margin: { t: 30, l: 30} };
+    var layout = { width: 500, height: 450, margin: { t: 30, l: 0} };
     Plotly.newPlot('gauge', data1, layout);
 });
 
