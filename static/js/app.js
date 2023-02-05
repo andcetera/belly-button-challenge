@@ -22,6 +22,9 @@ d3.json(url).then(function(data){
         orientation: 'h',
         text: hover
     }];
+    blayout = {
+        width: 500, height: 500, margin: { t: 0 }
+    }
    
     // Create initial bubble chart from first sample
     initbub = [{
@@ -34,6 +37,9 @@ d3.json(url).then(function(data){
             color: sample.otu_ids
         }
     }];
+    bublay = {
+        width: 1200, height: 500, margin: { t: 0, l: 30 }
+    }
 
     // Add the initial metadata to the Demographic Info panel
     let demo = d3.select('#sample-metadata');
@@ -44,8 +50,8 @@ d3.json(url).then(function(data){
     }
 
     // Display initial plots
-    Plotly.newPlot('bar', initbar);
-    Plotly.newPlot('bubble', initbub);
+    Plotly.newPlot('bar', initbar, blayout);
+    Plotly.newPlot('bubble', initbub, bublay);
 
 
     // Add names to the dropdown menu & give each a property we can call later

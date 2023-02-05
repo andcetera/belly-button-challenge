@@ -11,7 +11,8 @@ d3.json(url).then(function(data){
             value: meta[0].wfreq,
             title: { text: "<b>Belly Button Wash Frequency</b><br>(Scrubs Per Week)" },
             type: "indicator",
-            mode: "gauge",
+            mode: "gauge+number",
+            ids: ['0-1', '1-2', '2-3', '3-4', '4-5', '5-6', '6-7', '7-8', '8-9'],
             gauge: {
                 axis: { range: [0, 9], ticks: ''},
                 steps: [
@@ -31,12 +32,13 @@ d3.json(url).then(function(data){
         }
     ];
 
-    var layout = { width: 600, height: 500, margin: { t: 0, b: 0 } };
+    var layout = { width: 500, height: 450, margin: { t: 30, l: 30} };
     Plotly.newPlot('gauge', data1, layout);
 
 
     // set listener on dropdown menu to run updatePlots function on change
     // (#selDataset has property onchange="optionChanged(this.value)...)
+
         // works but breaks app.js updates
     //d3.selectAll('#selDataset').on('change', updateGauge);
 
