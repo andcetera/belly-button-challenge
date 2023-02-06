@@ -14,10 +14,7 @@ d3.json(url).then(function(data){
             mode: "gauge+number",
             gauge: {
                 axis: { range: [0, 9], 
-                    ticks: '',
-                    tickmode: 'linear',
-                    tick0: 0,
-                    dtick: 1,
+                    visible: false
                 },
                 steps: [
                     { range: [0, 1], color: 'rgba(253, 231, 37, 0.7)'},
@@ -44,8 +41,35 @@ d3.json(url).then(function(data){
         }
     ];
 
+    rad = 0.465;
+    theta = -0.04;
+    xpos = [];
+    ypos = [];
+    t = [];
+    step = 0.40;
+    for(s = 0; s < 9; s++){
+        xpos.push(0.5 + rad * Math.cos(theta));
+        ypos.push(0.28 + rad * Math.sin(theta));
+        t.push(theta * 52 + 279.5);
+        theta += step;
+    }
+    console.log(xpos, ypos);
+
     // Add layout information and display plot
-    var layout = {width: 450, height: 450, margin: 'auto'};
+    var layout = {
+        width: 450, height: 450, margin: 'auto',
+        annotations: [
+            {x: xpos[0], y: ypos[0], text: '<b>8-9</b>', showarrow: false, font:{ color: 'white'}},
+            {x: xpos[1], y: ypos[1], text: '<b>7-8</b>', showarrow: false, font:{ color: 'white'}},
+            {x: xpos[2], y: ypos[2], text: '<b>6-7</b>', showarrow: false, font:{ color: 'white'}},
+            {x: xpos[3], y: ypos[3], text: '<b>5-6</b>', showarrow: false, font:{ color: 'white'}},
+            {x: xpos[4], y: ypos[4], text: '<b>4-5</b>', showarrow: false, font:{ color: 'white'}},
+            {x: xpos[5], y: ypos[5], text: '<b>3-4</b>', showarrow: false, font:{ color: 'white'}},
+            {x: xpos[6], y: ypos[6], text: '<b>2-3</b>', showarrow: false, font:{ color: 'gray'}},
+            {x: xpos[7], y: ypos[7], text: '<b>1-2</b>', showarrow: false, font:{ color: 'dimgray'}},
+            {x: xpos[8], y: ypos[8], text: '<b>0-1</b>', showarrow: false, font:{ color: 'black'}}
+    ]
+};
     Plotly.newPlot('gauge', data1, layout);
 });
 
