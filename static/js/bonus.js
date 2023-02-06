@@ -20,7 +20,7 @@ d3.json(url).then(function(data){
                     dtick: 1,
                 },
                 steps: [
-                    { range: [0, 1], color: 'rgba(253, 231, 37, 0.7)'},
+                    { range: [0, 1], color: 'rgba(253, 231, 37, 0.7)',thickness:1},
                     { range: [1, 2], color: 'rgba(180, 222, 44, 0.7)'},
                     { range: [2, 3], color: 'rgba(109, 205, 89, 0.7)'},
                     { range: [3, 4], color: 'rgba(53, 183, 121, 0.7)'},
@@ -30,14 +30,27 @@ d3.json(url).then(function(data){
                     { range: [7, 8], color: 'rgba(62, 74, 137, 0.7)'},
                     { range: [8, 9], color: 'rgba(72, 40, 120, 0.7)'}
                 ],
-                bar: { color: 'black', thickness: 0.1},
-                borderwidth: 0
+                bar: {thickness: 0},
+                borderwidth: 0,
+                threshold: {
+                    value: meta[0].wfreq,
+                    thickness: 1,
+                    line: {
+                        color: 'black',
+                        width: 6
+                    }
+                },
             }
         }
     ];
 
+
+
     // Add layout information and display plot
-    var layout = { width: 450, height: 450, margin: {l:20} };
+    var layout = {
+        width: 450, height: 450, margin: 'auto',
+        annotations: [{x:0.015, y:0.3, text:'a-b', textangle: 275, showarrow:false}]
+};
     Plotly.newPlot('gauge', data1, layout);
 });
 
@@ -63,4 +76,5 @@ function optionChanged(x){
     
     // Restyle the plot
     Plotly.restyle('gauge', 'value', [wash]);
+    Plotly.restyle('gauge', 'gauge.threshold.value', [wash]);
 }
