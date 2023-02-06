@@ -146,20 +146,10 @@ d3.json(url).then(function(data){
         Plotly.restyle('bubble', 'marker.size', [bsize]);
         Plotly.restyle('bubble', 'marker.color', [bcolor]);
 
+        // Filter metadata list to find our sample
+        bb = meta.filter(n => n.id.toString() === name)[0];
 
-        // Iterate through the meta list to update Demographic Info box
-        for(i = 0; i < meta.length; i++){
-            
-            // Check if our selection matches
-            if(meta[i].id.toString() === name){
-
-                // Iterate through keys & update text fields
-                for(j = 0; j < keys.length; j++){
-                    k = keys[j];
-                    p = d3.select(`#${k}`).text(`${k}: ${meta[i][k.toString()]}`);
-                    
-                }
-            }
-        } 
+        // Update keys in Demographic Info box
+        keys.map(k => d3.select(`#${k}`).text(`${k}: ${bb[k.toString()]}`));
     }
 });
