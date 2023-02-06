@@ -20,7 +20,7 @@ d3.json(url).then(function(data){
                     dtick: 1,
                 },
                 steps: [
-                    { range: [0, 1], color: 'rgba(253, 231, 37, 0.7)',thickness:1},
+                    { range: [0, 1], color: 'rgba(253, 231, 37, 0.7)'},
                     { range: [1, 2], color: 'rgba(180, 222, 44, 0.7)'},
                     { range: [2, 3], color: 'rgba(109, 205, 89, 0.7)'},
                     { range: [3, 4], color: 'rgba(53, 183, 121, 0.7)'},
@@ -44,13 +44,8 @@ d3.json(url).then(function(data){
         }
     ];
 
-
-
     // Add layout information and display plot
-    var layout = {
-        width: 450, height: 450, margin: 'auto',
-        annotations: [{x:0.015, y:0.3, text:'a-b', textangle: 275, showarrow:false}]
-};
+    var layout = {width: 450, height: 450, margin: 'auto'};
     Plotly.newPlot('gauge', data1, layout);
 });
 
@@ -58,16 +53,13 @@ d3.json(url).then(function(data){
 // Function to Update Plot when new sample is chosen from dropdown menu
 function optionChanged(x){
 
-    // Get new sample name
-    let name = d3.select('#selDataset').property('value');
-
     let wash = 0;
     
     // Iterate through the meta list to update wash frequency number
     for(i = 0; i < meta.length; i++){
                 
         // Check if our selection matches
-        if(meta[i].id.toString() === name){
+        if(meta[i].id.toString() === x){
     
             // Update wfreq variable
             wash = meta[i].wfreq;
