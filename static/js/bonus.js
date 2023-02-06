@@ -41,19 +41,17 @@ d3.json(url).then(function(data){
         }
     ];
 
+    // get x & y positions for gauge segment labels
     rad = 0.465;
     theta = -0.04;
+    step = 0.4;
     xpos = [];
     ypos = [];
-    t = [];
-    step = 0.40;
     for(s = 0; s < 9; s++){
         xpos.push(0.5 + rad * Math.cos(theta));
         ypos.push(0.28 + rad * Math.sin(theta));
-        t.push(theta * 52 + 279.5);
         theta += step;
     }
-    console.log(xpos, ypos);
 
     // Add layout information and display plot
     var layout = {
