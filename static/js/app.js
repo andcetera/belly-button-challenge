@@ -29,7 +29,7 @@ d3.json(url).then(function(data){
     // Add layout details to bar chart
     blayout = {
         width: 500, height: 500, margin: 'auto',
-        title: '<b>Top 10 Microbial Species<br>Present in Sample</b>',
+        title: '<b>Top 10 Microbial Species Present in Sample</b><br>(Hover for OTU Labels)',
         xaxis: {
             title: '<b>Sample Values</b>'
         },
@@ -54,7 +54,7 @@ d3.json(url).then(function(data){
     // Add layout details to bubble plot
     bublay = {
         width: 1150, height: 500, margin: 'auto',
-        title: '<b>All Microbial Species Present in Sample</b><br>(OTU ID by Values in Sample)',
+        title: '<b>All Microbial Species Present in Sample:<br>OTU ID by Values in Sample</b><br>(Hover for OTU Labels)',
         xaxis: {
             title: '<b>Operational Taxonomic Unit IDs</b>'
         },
@@ -72,7 +72,9 @@ d3.json(url).then(function(data){
         bold.append('p').text(`${keys[i]}: ${values[i]}`).attr('id', keys[i].toString());
     }
 
-    // Update color of Demographic Info panel to match our dashboard style
+    // Update style of page elements to match our dashboard style
+    d3.select('h1').style('color', 'darkslateblue');
+    d3.select('h5').style('font-weight', 'bold');
     d3.select('.panel-primary').style('border-color', 'slateblue');
     d3.select('.panel-heading').style('background-color', 'slateblue');
     d3.select('.panel-heading').style('border-color', 'slateblue');
